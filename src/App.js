@@ -1,13 +1,28 @@
 //import logo from './logo.svg';
 //import './App.css';
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 function App() {
 
   var [totalSeconds, setTotalSeconds] = useState(25 * 60);
+  var [started, setStarted] = useState(false);
+  var [timer, setTimer] = useState(null);
 
   var togglePomodoro = () => {
+    setStarted(started = !started);
 
+    if(started)
+    {
+      setTimer(setInterval(() => {
+
+          setTotalSeconds((totalSeconds) => totalSeconds > 0 ? totalSeconds - 1 : 0);
+
+      }, 1000));
+    }
+    else
+    {
+      clearInterval(timer);
+    }
   }
 
   return (
@@ -22,7 +37,7 @@ function App() {
         <button
           onClick={ togglePomodoro }
           className='mt-5 text-red-300 bg-white text-xl rounded py-2 w-48 border-2 border-white hover:bg-red-300 hover:text-white'>
-          Start
+          Start { started.toString() }
         </button>
       </section>
     </main>
