@@ -25,6 +25,10 @@ function App() {
     }
   }
 
+  var resetCount = () => {
+    setTotalSeconds(25 * 60);
+  }
+
   return (
     <main className="bg-red-400 h-screen">
       <header className="w-4/5 mx-auto py-3">
@@ -37,8 +41,10 @@ function App() {
         <button
           onClick={ togglePomodoro }
           className='mt-5 text-red-300 bg-white text-xl rounded py-2 w-48 border-2 border-white hover:bg-red-300 hover:text-white'>
-          Start { started.toString() }
+          { !started ? "Start" : "Pause" }
         </button>
+        <br/>
+        <a href="#" className="text-white mt-3 inline-block" onClick={ resetCount }>Reset Counter</a>
       </section>
     </main>
   );
